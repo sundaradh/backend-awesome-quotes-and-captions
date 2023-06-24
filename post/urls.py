@@ -4,7 +4,7 @@ from django.urls import (
 )
 from .views import (
     PostViewSet,
-  
+    PrivacyPolicy
 )
 from rest_framework import routers
 
@@ -14,4 +14,5 @@ router.register(r'post', PostViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('privacy-policy/', PrivacyPolicy.as_view(), name='privacy-policy'),
 ]

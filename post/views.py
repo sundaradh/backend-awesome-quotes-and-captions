@@ -1,3 +1,5 @@
+from django.shortcuts import render
+from django.views import View
 from rest_framework import authentication, permissions, viewsets
 from .models import Post
 from .serializers import PostSerializer
@@ -39,3 +41,8 @@ class PostViewSet(viewsets.ModelViewSet):
 
         return queryset
 
+
+class PrivacyPolicy(View):
+    def get(self, request):
+        template_name = 'privacypolicy.html'
+        return render(request, template_name)
