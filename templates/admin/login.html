@@ -1,0 +1,230 @@
+{% block extrastyle %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class="container main">
+            <div class="row">
+                <div class="col-md-6 side-image">
+                    <h2 class="text-center" style="color: rgba(255, 107, 138, 0.83)">Admin Panel</h2>
+                    <img src="https://fyp.amrit69.com.np/on-board1.png" alt="Welcome Image" style="width: 400px;">
+                </div>
+                <div class="col-md-5 right pr-4 pt-0">
+                    <div class="input-box">
+                        <br/>
+                        <h2 class="text-center" style="color: rgba(255, 107, 138, 0.83)">Awesome Quotes and
+                            Captions</h2>
+                        <br/>
+                        <h5 style="color: rgba(255, 107, 138, 0.83)">Login</h5>
+                        <div class="logo-container">
+                            {#                            <img src="https://fyp.amrit69.com.np/logo2.png"  alt="logo">#}
+                        </div>
+                        <div class="text-center">
+                            <form action="{{ app_path }}" method="post" id="login-form">
+                                {% csrf_token %}
+                                <div class="input-field">
+                                    <br/>
+                                    {{ form.username.label_tag }}
+                                    {{ form.username }}
+                                    <br/>
+                                </div>
+                                <div class="input-field">
+                                    <br/>
+                                    {{ form.password.label_tag }}
+                                    {{ form.password }}
+                                    <br/>
+                                </div>
+                                <div class="input-field">
+                                    <input type="submit" class="submit" value="Login">
+                                </div>
+                                <br/>
+                                <br/>
+                                {% if form.errors %}
+                                    <div class="alert alert-danger">
+                                        {% for error in form.non_field_errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                        {% for field in form %}
+                                            {% for error in field.errors %}
+                                                {{ field.label }}: {{ error }}
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <style>
+                    input[type="text"],
+                    input[type="password"] {
+                        width: 100%;
+                        height: 45px;
+
+                    }
+                </style>
+            </div>
+        </div>
+
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+
+            h2 {
+                margin-bottom: -2px;
+                color: black;
+            }
+
+            * {
+                font-family: 'Poppins', sans-serif;
+            }
+
+            .wrapper {
+                background: #ececec;
+                padding: 0 20px 0 20px;
+            }
+
+            .main {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+            }
+
+            .row {
+                width: 900px;
+                height: 550px;
+                border-radius: 10px;
+                background: #fff;
+                box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.2);
+            }
+
+            .side-image {
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                position: relative;
+                border-radius: 10px 0 0 10px;
+            }
+
+            img {
+                width: 250px;
+                position: absolute;
+                top: 30px;
+                left: 30px;
+                right: 20px;
+            }
+
+            .text p {
+                color: #fff;
+                font-size: 18px;
+            }
+
+            i {
+                font-weight: 400;
+                font-size: 15px;
+            }
+
+            .right {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+            }
+
+            .input-box {
+                width: 500px;
+                box-sizing: border-box;
+            }
+
+            .input-box header {
+                font-weight: 700;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+
+            .input-field {
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                padding: 0 20px 0 10px;
+            }
+
+            .input {
+                height: 45px;
+                width: 100%;
+                background: transparent;
+                border: none;
+                border-bottom: 1px solid rgba(255, 107, 138, 0.83);
+                outline: none;
+                margin-bottom: 20px;
+                color: #40414a;
+            }
+
+            .input-box .input-field label {
+                position: absolute;
+                top: 1px;
+                left: 10px;
+                pointer-events: none;
+                transition: .5s;
+            }
+
+            .input-field .input:focus ~ label {
+                top: -10px;
+                font-size: 13px;
+            }
+
+            .input-field .input:valid ~ label {
+                top: -10px;
+                font-size: 13px;
+                color: black;
+            }
+
+            .input-field .input:focus, .input-field .input:valid {
+                border-bottom: 1px solid rgba(255, 107, 138, 0.83);
+            }
+
+            .submit {
+                border: saddlebrown;
+                outline: rgba(255, 107, 138, 0.83);
+                height: 45px;
+                background: rgba(255, 195, 207, 0.83);
+                border-radius: 5px;
+                transition: .4s;
+            }
+
+            .submit:hover {
+                background: rgba(255, 107, 138, 0.83);
+                color: rgba(255, 255, 255, 0.83);
+            }
+
+
+            span a {
+                text-decoration: none;
+                font-weight: 700;
+                color: #000;
+                transition: .5s;
+            }
+
+            span a:hover {
+                color: #5d5076;
+            }
+
+            @media only screen and (max-width: 768px) {
+                .side-image {
+                    border-radius: 10px 10px 0 0;
+                }
+
+                img {
+                    width: 35px;
+                    position: absolute;
+                    top: 20px;
+                    left: 47%;
+                }
+                .row {
+                {#max-width: 520px;#} width: 100%;
+                }
+            }
+        </style>
+    </div>
+{% endblock %}
