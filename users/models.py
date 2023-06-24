@@ -25,17 +25,3 @@ class User(AbstractUser):
 
     REQUIRED_FIELDS = []
 
-
-class Payment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    payment_method = models.CharField(max_length=100)
-    amount = models.FloatField()
-    payment_status = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-
-
-    def __str__(self):
-        return self.user.full_name
-
-

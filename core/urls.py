@@ -12,11 +12,8 @@ admin.site.index_title = "Awesome Quotes And Captions"
 url_patterns = [
     path('admin/', admin.site.urls),
     path('baton/', include('baton.urls')),
-    path('api/', include('dj_rest_auth.urls')),
-    path('api/', include('rest_registration.api.urls')),
     path('api/', include('category.urls')),
     path('api/', include('post.urls')),
-    path('api/', include('users.urls')),
     path('api/', include('notification.urls')),
     path('', admin.site.urls),
 

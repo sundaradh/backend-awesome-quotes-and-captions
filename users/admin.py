@@ -34,8 +34,3 @@ class UserAdmin(admin.ModelAdmin):
 # class UsersAdmin(admin.ModelAdmin):
 #           pass
 
-class PaymentAdmin(admin.ModelAdmin):
-    list_display = ['user', 'payment_method', 'amount', 'payment_status', 'created_at']
-
-
-admin.site.register(Payment, PaymentAdmin)

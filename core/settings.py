@@ -31,12 +31,6 @@ INSTALLED_APPS = [
 
     'baton.autodiscover',
     'rest_framework',
-    'dj_rest_auth',
-    'rest_framework.authtoken',
-    'dj_rest_auth.registration',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    'rest_registration',
     'django_admin_generator',
     'import_export',
     # local apps
@@ -47,16 +41,6 @@ INSTALLED_APPS = [
 
 ]
 
-REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'users.serializers.UserSerializer',
-
-}
-
-REST_REGISTRATION = {
-    'REGISTER_VERIFICATION_ENABLED': False,
-    'RESET_PASSWORD_VERIFICATION_ENABLED': False,
-    'REGISTER_EMAIL_VERIFICATION_ENABLED': False,
-}
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
