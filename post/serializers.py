@@ -3,18 +3,15 @@ from .models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
-    likes = serializers.SerializerMethodField()
     category_name = serializers.SerializerMethodField()  
     date_posted = serializers.SerializerMethodField()
-    is_favorite = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
         fields = '__all__'
         
 
-    def get_likes(self, obj):
-        return obj.likes.count()
+   
 
     def get_category_name(self, obj):
         return obj.category.name
