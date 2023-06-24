@@ -14,13 +14,6 @@ def get_admin_stats(request):
     return {
         'total_users': User.objects.count(),
         'total_posts': Post.objects.count(),
-        "total_categories": Category.objects.count(),
-
-        # Most liked posts
-        "most_liked_posts": Post.objects.order_by('-total_likes')[:5],
-
-        # Most liked categories linked to posts
-        "most_liked_categories": Category.objects.annotate(total_category_likes=Sum('posts__total_likes')).order_by(
-            '-total_category_likes')[:5]
+        "total_categories": Category.objects.count(), 
 
     }

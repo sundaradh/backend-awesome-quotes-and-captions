@@ -1,67 +1,30 @@
+from .models import Post
+from import_export.admin import ImportExportModelAdmin
 from django.contrib import admin
 
-# Register your models here.
-# vim: set fileencoding=utf-8 :
-from django.contrib import admin
 
-import post.models as models
+class PostAdmin(ImportExportModelAdmin):
+    list_display = ('content', 'author', 'category',
+                    'is_active', )
+    search_fields = ('content', 'author__username', 'category__name')
+    list_filter = ('is_active', 'category__name')
+    date_hierarchy = 'date_posted'
+    list_per_page = 10
+    actions = ('activate', 'deactivate')
 
+    def activate(self, request, queryset):
+        queryset.update(is_active=True)
+        self.message_user(
+            request, 'Selected posts have been activated successfully')
 
-class PostAdmin(admin.ModelAdmin):
-    list_display = (
-        'id',
-        'content',
-        'image',
-        'date_posted',
-        'author',
-        'category',
-        'total_likes'
-    )
-    list_filter = (
-        'date_posted',
-        'author',
-        'category',
-        'id',
-        'content',
-        'image',
-    )
-    fields = [
-        'content',
-        'image',
-        'author',
-        'category',
-        'likes',
-    ]
-    readonly_fields = [
-        'total_likes',
-    ]
+    activate.short_description = 'Activate selected posts'
+
+    def deactivate(self, request, queryset):
+        queryset.update(is_active=False)
+        self.message_user(
+            request, 'Selected posts have been deactivated successfully')
+
+    deactivate.short_description = 'Deactivate selected posts'
 
 
-def _register(model, admin_class):
-    admin.site.register(model, admin_class)
-
-
-_register(models.Post, PostAdmin)
-
-
-class LikeAdmin(admin.ModelAdmin):
-    list_display = (
-        'id',
-        'user',
-        'post',
-    )
-    list_filter = (
-        'id',
-        'user',
-        'post',
-    )
-
-
-_register(models.Like, LikeAdmin)
-
-
-class FavoriteAdmin(admin.ModelAdmin):
-    pass
-
-
-_register(models.Favorite, FavoriteAdmin)
+admin.site.register(Post, PostAdmin)

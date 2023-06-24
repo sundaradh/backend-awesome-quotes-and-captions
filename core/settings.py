@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount',
     'rest_registration',
     'django_admin_generator',
+    'import_export',
     # local apps
     'users',
     'category',

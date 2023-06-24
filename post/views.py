@@ -1,7 +1,6 @@
-from requests import Response
 from rest_framework import authentication, permissions, viewsets
-from .models import Post, Like, Favorite
-from .serializers import PostSerializer, LikeSerializer, FavoriteSerializer, FavListSerializer
+from .models import Post
+from .serializers import PostSerializer
 
 
 # Create your views here.
@@ -40,49 +39,3 @@ class PostViewSet(viewsets.ModelViewSet):
 
         return queryset
 
-
-class LikeCreateView(viewsets.ModelViewSet):
-    queryset = Like.objects.all()
-    serializer_class = LikeSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-
-
-class MyPost(viewsets.ModelViewSet):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
-
-    def get_queryset(self):
-        return Post.objects.filter(author=self.request.user)
-
-
-class FavoriteCreateView(viewsets.ModelViewSet):
-    queryset = Favorite.objects.all()
-    serializer_class = FavoriteSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
-
-    def get_queryset(self):
-        queryset = Favorite.objects.all()
-        user = self.request.query_params.get('user', None)
-        if user is not None:
-            queryset = queryset.filter(user=user)
-        return queryset
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-
-
-class FavoriteListView(viewsets.ModelViewSet):
-    queryset = Favorite.objects.all()
-    serializer_class = FavListSerializer
-    permission_classes = [permissions.IsAuthenticated]
-    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
-
-    def get_queryset(self):
-        return Favorite.objects.filter(user=self.request.user)

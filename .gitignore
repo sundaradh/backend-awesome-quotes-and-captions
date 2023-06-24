@@ -14,3 +14,11 @@ media/
 !**/migrations/__init__.py
 
 #
+
+.idea/
+.vscode/
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+```
